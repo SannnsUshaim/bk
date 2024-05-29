@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Bakti Kampus</title>
+    <link rel="stylesheet" href="output.css">
+    <!-- npx tailwindcss -i ./input.css -o ./output.css --watch -->
+</head>
+
+
+
+<body>
+    <!-- Link SpreadSheet -->
+
+    <div class="flex flex-col min-h-screen">
+        <header class="flex justify-start items-center px-4 py-6 bg-slate-800">
+            <h1 class="md:text-4xl sm:text-2xl font-bold text-white">Laporan Keterlambatan Siswa</h1>
+        </header>
+        <main class="flex flex-col px-4 py-5 gap-3">
+            <div class="flex flex-col gap-2">
+                <h2 class="md:text-2xl sm:text-xl font-bold">About</h2>
+                <p class="md:text-base sm:text-sm font-medium">Laporkan <b>Keterlambatan Siswa SMKN 4 Tangerang</b>.</p>
+            </div>
+            <div class="bg-teal-400 flex justify-between items-center alert w-[500px] sm:w-full rounded-md px-5 py-3 mt-5 hidden"
+                id="alert">
+                <p>Laporan <strong>Berhasil</strong> Terkirim.</p>
+                <button type="button" class="btn-close" id="btn-close">
+                    <span class="close-line origin-top-left transition"></span>
+                    <span class="close-line"></span>
+                    <span class="close-line origin-bottom-left transition"></span>
+                </button>
+            </div>
+            <div>
+                <form class="contact__form flex flex-col gap-5 sm:max-w-sm md:max-w-md" name="laporan">
+                    <div class="flex flex-col gap-2">
+                        <div id="contact__box" class="flex flex-col gap-1">
+                            <label for="nama" id="contact__label" class="font-medium text-lg">Nama Siswa</label>
+                            <input type="text" name="nama"
+                                class="border-[1px] border-gray-400 focus:outline-purple-800 shadow-sm rounded-md px-2 py-1"
+                                id="nama" required placeholder="Nama Siswa">
+                        </div>
+
+                        <div id="contact__box" class="flex flex-col gap-1">
+                            <label for="kelas" id="contact__label" class="font-medium text-lg">Kelas</label>
+                            <input type="text" name="kelas"
+                                class="border-[1px] border-gray-400 focus:outline-purple-800 shadow-sm rounded-md px-2 py-1"
+                                id="kelas" required placeholder="Kelas">
+                        </div>
+
+                        <div id="contact__box" class="flex flex-col gap-1">
+                            <label for="tgl_kgt" class="font-medium text-lg">Tanggal</label>
+                            <input type="date" id="tgl_kgt" name="tanggal"
+                                class="border-[1px] border-gray-400 focus:outline-purple-800 shadow-sm rounded-md px-2 py-1"
+                                required>
+                        </div>
+
+                        <div id="contact__box" class="flex flex-col gap-1">
+                            <label for="tgl_kgt" class="font-medium text-lg">Waktu</label>
+                            <input type="time" id="tgl_kgt" name="datang"
+                                class="border-[1px] border-gray-400 focus:outline-purple-800 shadow-sm rounded-md px-2 py-1"
+                                required>
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label for="target" class="font-medium text-lg">Alasan</label>
+                            <textarea name="alasan" id="target"
+                                class="border-[1px] border-gray-400 focus:outline-purple-800 shadow-sm rounded-md px-2 py-1"
+                                required placeholder="Alasan"></textarea>
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label for="bukti" class="font-medium text-lg flex items-start gap-1">Bukti Siswa <span
+                                    class="text-red-500">*</span> <span class="text-xs text-gray-400">Upload foto yang
+                                    sudah ada di device</span></label>
+
+                            <div class="preview__box">
+                                <img id="previewImage" src="#" alt="Preview Image"
+                                    style="display: none; max-width: 100%; height: auto;">
+                            </div>
+                            <div class="contact__box">
+                                <label for="bukti" class="custom-file-upload">Upload</label>
+                                <input type="file" name="bukti" id="bukti"
+                                    class="border-[1px] border-gray-400 focus:outline-purple-800 shadow-sm rounded-md block w-full mt-1 px-2 py-1"
+                                    accept="image/*" onchange="previewFile()">
+                                <script>
+                                    function previewFile() {
+                                        const preview = document.getElementById('previewImage');
+                                        const file = document.getElementById('bukti').files[0];
+                                        const reader = new FileReader();
+                                        reader.addEventListener("load", function () {
+                                            // Convert image file to base64 string
+                                            preview.src = reader.result;
+                                            preview.style.display = 'block';
+                                        }, false);
+
+                                        if (file) {
+                                            reader.readAsDataURL(file);
+                                        }
+                                    }
+                                </script>
+                                <!-- Script JavaScript untuk mengenkripsi gambar menjadi base64 -->
+                                <script>
+                                    document.getElementById("buktis").addEventListener("change", function (event) {
+                                        var file = event.target.files[0];
+                                        var reader = new FileReader();
+                                        reader.onloadend = function () {
+                                            document.getElementById("buktisEnc").value =
+                                                reader.result.split(",")[1];
+                                        };
+                                        reader.readAsDataURL(file);
+                                    });
+                                </script>
+                                <input type="hidden" id="buktisEnc" name="buktisEnc" />
+                            </div>
+                        </div>
+                    </div>
+                    <button id="btn-kirim" type="submit" value="Simpan Data"
+                        class="flex items-center gap-2 bg-slate-800 text-white px-4 py-1 rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+                            <path
+                                d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
+                        </svg>
+                        Simpan Data
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        const scriptURL =
+            "https://script.google.com/macros/s/AKfycbw9SKxQ5mQ7aeKDxqrw2yZO8BDwVc_M5uqaargzCfvG-eHvn5WA-ARSQuGLVUDJPcMNEQ/exec";
+        const form = document.forms["laporan"];
+        const btnKirim = document.querySelector("#btn-kirim");
+        const alert = document.querySelector("#alert");
+        // Tampilkan nomor baris di dalam formulir
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            fetch(scriptURL, {
+                    method: "POST",
+                    body: new FormData(form)
+                })
+                .then((response) => {
+                    // tampilkan alert
+                    alert.classList.toggle("hidden");
+                    // form reset
+                    form.reset();
+                    console.log("Success!", response);
+                })
+                .catch((error) => console.error("Error!", error.message));
+        });
+
+        const closeBtn = document.querySelector("#btn-close");
+        closeBtn.addEventListener("click", function (e) {
+            alert.classList.toggle("hidden");
+        });
+    </script>
+</body>
+
+</html>
