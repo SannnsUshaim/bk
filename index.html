@@ -80,29 +80,14 @@
                                     style="display: none; max-width: 100%; height: auto;">
                             </div>
                             <div class="contact__box">
-                                <label for="bukti" class="custom-file-upload">Upload</label>
+                                <!-- <label for="bukti" class="custom-file-upload">Upload</label> -->
                                 <input type="file" name="bukti" id="bukti"
                                     class="border-[1px] border-gray-400 focus:outline-purple-800 shadow-sm rounded-md block w-full mt-1 px-2 py-1"
-                                    accept="image/*" onchange="previewFile()">
-                                <script>
-                                    function previewFile() {
-                                        const preview = document.getElementById('previewImage');
-                                        const file = document.getElementById('bukti').files[0];
-                                        const reader = new FileReader();
-                                        reader.addEventListener("load", function () {
-                                            // Convert image file to base64 string
-                                            preview.src = reader.result;
-                                            preview.style.display = 'block';
-                                        }, false);
-
-                                        if (file) {
-                                            reader.readAsDataURL(file);
-                                        }
-                                    }
-                                </script>
+                                    accept="image/*">
+                                <input type="hidden" id="buktisEnc" name="buktisEnc" />
                                 <!-- Script JavaScript untuk mengenkripsi gambar menjadi base64 -->
                                 <script>
-                                    document.getElementById("buktis").addEventListener("change", function (event) {
+                                    document.getElementById("bukti").addEventListener("change", function (event) {
                                         var file = event.target.files[0];
                                         var reader = new FileReader();
                                         reader.onloadend = function () {
@@ -112,7 +97,6 @@
                                         reader.readAsDataURL(file);
                                     });
                                 </script>
-                                <input type="hidden" id="buktisEnc" name="buktisEnc" />
                             </div>
                         </div>
                     </div>
@@ -131,7 +115,7 @@
     <script src="script.js"></script>
     <script>
         const scriptURL =
-            "https://script.google.com/macros/s/AKfycbw9SKxQ5mQ7aeKDxqrw2yZO8BDwVc_M5uqaargzCfvG-eHvn5WA-ARSQuGLVUDJPcMNEQ/exec";
+            "https://script.google.com/macros/s/AKfycbxWtTjzsOkM9M_Bfy9s6jR01ZF6OnAksuNI6GuCsdR4IWe2tFpawLMrSIW1uulCAOZMMA/exec";
         const form = document.forms["laporan"];
         const btnKirim = document.querySelector("#btn-kirim");
         const alert = document.querySelector("#alert");

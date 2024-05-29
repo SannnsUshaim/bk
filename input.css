@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-input[type="file"] {
+/* input[type="file"] {
     display: none;
 }
 
 .custom-file-upload {
     @apply border-[1px] border-gray-400 rounded-md px-2 py-1 cursor-pointer;
-}
+} */
